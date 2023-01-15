@@ -23,13 +23,14 @@ jobs:
           php-version: ${{ matrix.php-version }}
           tools: phive
           coverage: none
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
 
       - name: Setup PHP-CS-Fixer
         run: |
           phive install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
           mv tools/php-cs-fixer tools/php-cs-fixer.phar
+
+      - name: Setup GitHub Auth Token
+        run: composer config -g github-oauth.github.com ${{ secrets.GIT_PAT }}
 
       - name: Install Coding Standard
         run: composer require eweso/eweso-standards

@@ -27,13 +27,14 @@ jobs:
           php-version: ${{ matrix.php-version }}
           tools: phive
           coverage: none
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
 
       - name: Setup PHPUnit
         run: |
           phive install --trust-gpg-keys 4AA394086372C20A phpunit
           mv tools/phpunit tools/phpunit.phar
+
+      - name: Setup GitHub Auth Token
+        run: composer config -g github-oauth.github.com ${{ secrets.GIT_PAT }}
 
       - name: Install Dependencies
         uses: ramsey/composer-install@v2
