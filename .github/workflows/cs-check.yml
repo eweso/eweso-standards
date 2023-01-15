@@ -1,0 +1,36 @@
+name: CS-Check
+on:
+  workflow_call:
+
+jobs:
+  cs-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+          - "8.1"
+
+    name: CS Check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Install Phive
+        uses: szepeviktor/phive@v1
+        with:
+          home: ${{ runner.temp }}/.phive
+          binPath: tools/phive
+
+      - name: Install PHP-CS-Fixer
+        run: php tools/phive install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
+
+      - name: Prepare PHP-CS-Fixer
+        run: mv tools/php-cs-fixer tools/php-cs-fixer.phar
+
+      - name: Run CS Check
+        run: composer run-script cs-check
