@@ -123,7 +123,9 @@ on: [ push, pull_request ]
 
 jobs:
   test:
+    name: Unit Tests
     uses: eweso/eweso-standards/.github/workflows/unit-test.yml@main
   cs-check:
-    uses: eweso/eweso-standards/.github/workflows/unit-test.yml@main
+    name: Coding Standard
+    uses: eweso/eweso-standards/.github/workflows/cs-check.yml@main
 ```

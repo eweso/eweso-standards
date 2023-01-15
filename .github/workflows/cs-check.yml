@@ -19,15 +19,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-
-      - name: Install Phive
-        uses: szepeviktor/phive@v1
-        with:
-          home: ${{ runner.temp }}/.phive
-          binPath: tools/phive
+          tools: phive
 
       - name: Install PHP-CS-Fixer
-        run: php tools/phive install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
+        run: php tools/phive.phar install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
 
       - name: Prepare PHP-CS-Fixer
         run: mv tools/php-cs-fixer tools/php-cs-fixer.phar
