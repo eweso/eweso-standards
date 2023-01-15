@@ -1,13 +1,9 @@
 # PhpStorm
 /.idea
 
+# System
+.DS_Store
+
 # Composer
 /vendor
 /composer.lock
-
-# Build Tools
-/.phive
-/tools
-
-# PHP-CS-Fixer
-/.php-cs-fixer.cache
