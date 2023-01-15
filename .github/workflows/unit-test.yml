@@ -19,18 +19,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup PHP
+      - name: Setup PHP, Composer and Phive
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl
+          tools: phive
           coverage: none
-
-      - name: Install Phive
-        uses: szepeviktor/phive@v1
-        with:
-          home: ${{ runner.temp }}/.phive
-          binPath: tools/phive
 
       - name: Install PHPUnit
         run: php tools/phive install --trust-gpg-keys 4AA394086372C20A phpunit

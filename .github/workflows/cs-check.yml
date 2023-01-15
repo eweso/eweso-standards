@@ -15,17 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup PHP
+      - name: Setup PHP, Composer and Phive
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           tools: phive
+          coverage: none
 
-      - name: Install PHP-CS-Fixer
-        run: phive install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
-
-      - name: Prepare PHP-CS-Fixer
-        run: mv tools/php-cs-fixer tools/php-cs-fixer.phar
+      - name: Setup PHP-CS-Fixer
+        run: | 
+          phive install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
+          mv tools/php-cs-fixer tools/php-cs-fixer.phar
 
       - name: Install Coding Standard
         run: composer require eweso/eweso-standards
