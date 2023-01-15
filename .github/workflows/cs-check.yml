@@ -24,7 +24,7 @@ jobs:
           tools: phive
           coverage: none
         env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP-CS-Fixer
         run: | 
