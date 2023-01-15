@@ -6,7 +6,7 @@ jobs:
   cs-check:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     strategy:
       matrix:
         php-version:
