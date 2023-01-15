@@ -30,7 +30,7 @@ jobs:
           mv tools/php-cs-fixer tools/php-cs-fixer.phar
 
       - name: Setup GitHub Auth Token
-        run: composer config -g github-oauth.github.com ${{ secrets.GIT_PAT }}
+        run: composer config --global --auth github-oauth.github.com ${{ secrets.GIT_PAT }}
 
       - name: Install Coding Standard
         run: composer require eweso/eweso-standards
