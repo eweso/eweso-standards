@@ -26,11 +26,10 @@ jobs:
           tools: phive
           coverage: none
 
-      - name: Install PHPUnit
-        run: php tools/phive install --trust-gpg-keys 4AA394086372C20A phpunit
-
-      - name: Prepare PHPUnit
-        run: mv tools/phpunit tools/phpunit.phar
+      - name: Setup PHPUnit
+        run: | 
+          php phive install --trust-gpg-keys 4AA394086372C20A phpunit
+          mv tools/phpunit tools/phpunit.phar
 
       - name: Install Dependencies
         uses: ramsey/composer-install@v2
