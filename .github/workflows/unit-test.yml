@@ -34,7 +34,7 @@ jobs:
           mv tools/phpunit tools/phpunit.phar
 
       - name: Setup GitHub Auth Token
-        run: composer config --global --auth github-oauth.github.com ${{ secrets.GIT_PAT }}
+        run: composer config --global --auth github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Dependencies
         uses: ramsey/composer-install@v2

@@ -125,7 +125,9 @@ jobs:
   test:
     name: Unit Tests
     uses: eweso/eweso-standards/.github/workflows/unit-test.yml@main
+    secrets: inherit
   cs-check:
     name: Coding Standard
     uses: eweso/eweso-standards/.github/workflows/cs-check.yml@main
+    secrets: inherit
 ```
