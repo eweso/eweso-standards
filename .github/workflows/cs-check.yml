@@ -32,5 +32,8 @@ jobs:
       - name: Prepare PHP-CS-Fixer
         run: mv tools/php-cs-fixer tools/php-cs-fixer.phar
 
+      - name: Install Coding Standard
+        run: composer require eweso/eweso-standards
+
       - name: Run CS Check
         run: composer run-script cs-check
