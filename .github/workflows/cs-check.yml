@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      REPO_HOST: http-basic.${{ secrets.REPO_HOST }}
+      REPO_USER: http-basic.${{ secrets.REPO_USER }}
+      REPO_PASS: http-basic.${{ secrets.REPO_PASS }}
     strategy:
       matrix:
         php-version:
@@ -29,8 +33,8 @@ jobs:
           phive install --trust-gpg-keys E82B2FB314E9906E php-cs-fixer
           mv tools/php-cs-fixer tools/php-cs-fixer.phar
 
-      - name: Setup GitHub Auth Token
-        run: composer config --global --auth github-oauth.github.com ${{ secrets.GIT_PAT }}
+      - name: Authenticate Private Packages
+        run: composer config --global $REPO_HOST $REPO_USER $REPO_PASS
 
       - name: Install Coding Standard
         run: composer require eweso/eweso-standards
