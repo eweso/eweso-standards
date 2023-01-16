@@ -1,7 +1,7 @@
 {
     "name": "eweso/eweso-standards",
     "extra": {
-        "branch-version": "23.0116.1"
+        "branch-version": "23.0116.2"
     },
     "require": {
         "php": "~8.1|~8.2"

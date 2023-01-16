@@ -9,8 +9,8 @@ jobs:
       contents: read
     env:
       REPO_HOST: http-basic.${{ secrets.REPO_HOST }}
-      REPO_USER: http-basic.${{ secrets.REPO_USER }}
-      REPO_PASS: http-basic.${{ secrets.REPO_PASS }}
+      REPO_USER: ${{ secrets.REPO_USER }}
+      REPO_PASS: ${{ secrets.REPO_PASS }}
     strategy:
       matrix:
         php-version:
