@@ -21,6 +21,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Cache Phive Packages
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-phive-cs-check
+        with:
+          path: ~/.phive
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
       - name: Setup PHP, Composer and Phive
         uses: shivammathur/setup-php@v2
         with:
