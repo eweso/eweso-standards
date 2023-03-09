@@ -1,52 +1,48 @@
 # Eweso standards
 
-Thir library provides workflows, coding standard configuration and a general
-documentation about package naming, structure, documentation and defines
-basic .gitignore and composer.json content. It also describes how
-CI tools such as PHP-CS-Fixer and PHPUnit must be included to the project
-and how code should be documentated.
+This library provides workflows, coding standards and general information about package naming, structure and documentation, as well as information about basic `.gitignore` and `composer.json` setup. It also describes how CI tools like `PHP-CS-Fixer` and `PHPUnit` must be used in packages.
 
-## Package naming and structure
+## Package structure
 
-The root directory for PHP library package classes is `/src`. The autoloader
-must follow PSR-4 standard in the composer.json and start match follwing
-namespace naming schema: 
+```
+# Package folders
+/assets     (Contains package.json, node_modules, SASS and TS source)
+/config     (Contains configuration for the PHP module)
+/docs       (Contains AsciiDoc documentation)
+/lang       (Contains POT, PO and MO gettext files)
+/src        (Contains PSR-4 compliant PHP source code)
+/public     (Contains CSS, JS and other public resources)
+/tests      (Contains PSR-4 compliant PHP tests)
+/templates  (Contains PHTML template files)
 
-`Eweso\{{PackageName}}`
+# Vendor folders
+/tools      (Contains dev tools like PHPUnit and PHP-CS-Fixer)
+/vendor     (Contains composer packages)
 
-Tests must be located in the `/tests` directory ans also follow the PSR-4
-autloading standard. The namespace naming schema must follow the package's
-namespace schema:
+# Package files
+.gitignore
+.php-cs-fixer.php
+composer.json
+phpunit.xml
+README.md
+```
 
-`Eweso\{{PackageName}}\Tests`
+## Package naming
 
-A package name must include the `eweso-` prefix in its name.
+All package names must start with the prefix `eweso-`. Classes and namespaces must follow the `PSR-1` basic coding standard. The following naming convention applies to library packages:
+
+```
+/src    -> Eweso\{{PackageName}}
+/tests  -> Eweso\{{PackageName}}\Tests
+```
 
 ## Documentation
 
-Eweso's documentation is based on ReStructuredText files located in the 
-`/docs` directory of the package's root directory. Since various
-definitions for titles exists, titles are limited to maximum 3 levels
-and must follow the syntax below:
-
-```rst
-========= 
-Heading 1
-=========
-
-Heading 2
----------
-
-Heading 3
-~~~~~~~~~
-```
+Eweso's documentation is based on the AsciiDoc standard. The documentation files must be placed in the `/docs` directory.
 
 ## Development Tools
 
-Tools like `PHP-CS-Fixer` and `PHPUnit` must be installed via `Phive` to the
-`/tools` directory. Autoloading via the package's composer.json is not allowed
-to avoid package version conflicts. It is recommende to add the following 
-scripts to the `composer.json` file.
+Tools like `PHP-CS-Fixer` and `PHPUnit` must be installed via `Phive` to the `/tools` directory. Autoloading via the package's composer.json is not allowed to avoid package version conflicts. It is recommended to add the following scripts to the `composer.json` file.
 
 ```json
 {
@@ -69,12 +65,9 @@ scripts to the `composer.json` file.
 }
 ```
 
-## Coding standard (style)
+## Coding standard
 
-Coding standard (CS) check and fix is based on `PHP-CS-Fixer`. To use the current
-CS ruleset add `eweso/eweso-standards` to the required dependencies of 
-the package and create `.php-cs-fixer.php` in the package's root directory
-with following content:
+The coding standard (CS) is maintained with `PHP-CS-Fixer` and is based on the slightly modified `PSR-12` standard. To use the current coding standard ruleset, add `eweso/eweso-standards` to the required dependencies of the package and create `.php-cs-fixer.php` in the root directory of the package with following content:
 
 ```php
 <?php
@@ -92,9 +85,7 @@ return $configFactory($finder);
 
 ## Unit tests
 
-Unit tests are based on PHPUnit version 9.5+ and must be fully configured via 
-`phpunit.xml` located in the packages's root directory. 
-The following `phpunit.xml` is a basic but fully functional example:
+Unit tests are based on `PHPUnit` version 9.5+ and must be fully configured via `phpunit.xml` located in the package root directory. The following `phpunit.xml` is a basic but fully functional example:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -111,11 +102,9 @@ The following `phpunit.xml` is a basic but fully functional example:
 </phpunit>
 ```
 
-## Workflows
+## CI Workflows
 
-There are currently two workflows supported that should be included in the 
-package's workflow located under `./github/workflows/ci.yml` with following
-content:
+There are currently two supported CI workflows that should be included in the package's workflow configuration located at `./github/workflows/ci.yml` with the following content:
 
 ```yaml
 name: CI
